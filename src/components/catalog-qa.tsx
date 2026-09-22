@@ -1,16 +1,17 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import type { Listing } from "@/lib/listings";
 
 interface AskResponse { answer?: string; error?: string; }
 
-export function CatalogQa({ currentListingTitle }: { currentListingTitle: string }) {
+export function CatalogQa({ currentListing }: { currentListing: Listing }) {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isAsking, setIsAsking] = useState(false);
   const suggestions = [
-    `What condition is the ${currentListingTitle} in?`,
+    `What condition is the ${currentListing.title} in?`,
     "Compare the MacBook Air M1 and Lenovo ThinkPad T14.",
     "What's the cheapest camera in the catalogue?",
   ];
@@ -22,7 +23,7 @@ export function CatalogQa({ currentListingTitle }: { currentListingTitle: string
     if (!trimmedQuestion) { setError("Enter a question about the catalogue."); return; }
     setIsAsking(true); setError(null); setAnswer(null);
     try {
-      const response = await fetch("/api/ask", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ question: trimmedQuestion }) });
+      const response = await fetch("/api/ask", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ question: trimmedQuestion, currentListing }) });
       const payload = (await response.json()) as AskResponse;
       if (!response.ok || typeof payload.answer !== "string") throw new Error(payload.error ?? "Catalog Q&A could not be completed.");
       setAnswer(payload.answer);

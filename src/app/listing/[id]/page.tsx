@@ -44,7 +44,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
           </dl>
         </div>
       </article>
-      <CatalogQa currentListingTitle={listing.title} />
+      <CatalogQa currentListing={listing} />
     </main>
   );
 }

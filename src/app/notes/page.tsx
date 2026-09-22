@@ -7,18 +7,16 @@ export default function NotesPage() {
 
         <section className="mt-9">
           <h2 className="text-xl font-bold tracking-tight text-slate-950">What I built, and who it&apos;s for</h2>
-          <p className="mt-3 whitespace-pre-line leading-7 text-slate-700">[1-2 sentences: your marketplace concept + target audience — e.g.
-&quot;A second-hand marketplace for [X], letting [audience] browse and search
-listings for [categories] without needing to create an account.&quot;]</p>
+          <p className="mt-3 leading-7 text-slate-700">ImpactSG is a second-hand electronics marketplace for buyers and sellers in Singapore, letting anyone browse and search listings across phones, computers, audio gear, cameras, gaming, and accessories without creating an account.</p>
         </section>
 
         <section className="mt-8">
           <h2 className="text-xl font-bold tracking-tight text-slate-950">What&apos;s seeded, simulated, or limited</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 leading-7 text-slate-700">
-            <li>Listings: [X] seeded items across [Y] categories, generated via [seed script/JSON].</li>
-            <li>Payments: not implemented — out of scope per the brief.</li>
+            <li>Listings: 24 seeded items across 6 categories (Phones, Computers, Audio, Cameras, Gaming, and Accessories), each with a title, price, category, description, and condition note simulating a real seller&apos;s disclosure.</li>
+            <li>Payments: not implemented — out of scope per the brief; all transactions are simulated.</li>
             <li>Authentication: not implemented — browsing and all core flows are anonymous by design.</li>
-            <li>[Anything else you simplified — e.g. images are placeholders, no real sellers, etc.]</li>
+            <li>Sellers are not modeled as real users — listings are static seed data rather than tied to individual seller accounts.</li>
           </ul>
         </section>
 
@@ -26,35 +24,26 @@ listings for [categories] without needing to create an account.&quot;]</p>
           <h2 className="text-xl font-bold tracking-tight text-slate-950">AI tools and models</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 leading-7 text-slate-700">
             <li>Built with: Codex CLI (via CognitioLabs&apos; gateway)</li>
-            <li className="whitespace-pre-line">Search powered by: [model name] — [1 sentence on approach, e.g. &quot;sends
-the query and full catalogue to the model, which returns ranked matching
-listing IDs&quot;]</li>
-            <li className="whitespace-pre-line">Catalogue Q&amp;A powered by: [model name] — [1 sentence on approach, e.g.
-&quot;grounded in catalogue data via system prompt; instructed to state when
-information isn&apos;t available rather than guess&quot;]</li>
+            <li>Search powered by: openai/gpt-4o-mini — sends the user&apos;s query along with the full catalogue to the model, which returns a ranked list of matching listing IDs that the frontend then renders using the existing listing cards.</li>
+            <li>Catalogue Q&amp;A powered by: openai/gpt-4o-mini — grounded in catalogue data via a system prompt that instructs the model to answer only from the listings provided and explicitly say when information isn&apos;t available, rather than guessing.</li>
           </ul>
         </section>
 
         <section className="mt-8">
           <h2 className="text-xl font-bold tracking-tight text-slate-950">What I chose not to build, and why</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 leading-7 text-slate-700">
-            <li className="whitespace-pre-line">[e.g. &quot;Vector/embedding-based search — the catalogue is small enough
-(X listings) that sending the full set to the model each query was
-simpler and worked well within the time available.&quot;]</li>
-            <li className="whitespace-pre-line">[e.g. &quot;Multi-turn conversation memory for Q&amp;A — kept each question
-independent to reduce complexity given the timeframe.&quot;]</li>
-            <li>[Anything else you deliberately skipped or simplified — be honest here, this is a graded criterion, not a confession.]</li>
+            <li>Vector/embedding-based search — the catalogue is small enough (24 listings) that sending the full set to the model on each query was simpler and performed well within the time available.</li>
+            <li>Multi-turn conversation memory for Q&amp;A — each question is handled independently to keep the implementation reliable and reduce complexity given the timeframe.</li>
+            <li>User accounts, saved listings, and buyer-seller messaging — out of scope per the brief, which does not expect authentication or logistics integrations.</li>
           </ul>
         </section>
 
         <section className="mt-8">
           <h2 className="text-xl font-bold tracking-tight text-slate-950">Known issues and unfinished parts</h2>
           <ul className="mt-3 list-disc space-y-2 pl-5 leading-7 text-slate-700">
-            <li className="whitespace-pre-line">[e.g. &quot;Search occasionally misses items when queries use very indirect
-phrasing.&quot;]</li>
-            <li className="whitespace-pre-line">[e.g. &quot;No pagination — all listings load on one page; fine at this
-catalogue size but wouldn&apos;t scale.&quot;]</li>
-            <li>[Anything you know is rough, incomplete, or a hack. List it — the brief explicitly rewards honesty here over pretending everything&apos;s polished.]</li>
+            <li>Search relevance depends on how directly the query maps to listing text (title or description); very indirect or oblique phrasing can miss relevant items.</li>
+            <li>No pagination — all 24 listings load on a single page, which works at this catalogue size but would not scale to a larger one.</li>
+            <li>Product images are placeholders from placehold.co, not real seller-submitted photos.</li>
           </ul>
         </section>
       </article>
